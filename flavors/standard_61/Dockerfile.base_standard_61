@@ -1,17 +1,20 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 COPY ext/01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc 
+
+ENV DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 
 RUN apt-get -y update && \
     apt-get -y install \
         software-properties-common \
         coreutils \
         locales \
-        openjdk-9-jdk-headless \
+        openjdk-11-jdk-headless \
         python2.7-dev  \
         r-base \
         r-base-dev \
-        libzmq-dev \
+        libnss-db \
+        libzmq3-dev \
         python-zmq \
         python3-zmq \
         protobuf-compiler \
@@ -43,7 +46,7 @@ RUN apt-get -y update && \
         python-pykickstart \
         python-pyodbc \
         python-openssl \
-        python-pypdf \
+        python-pypdf2 \
         python-ldb \
         python-ldap \
         cython \
@@ -103,7 +106,7 @@ RUN apt-get -y update && \
         git && \
     pip3 install protobuf && \
     pip install azure-storage && \
-    easy_install pytz && \
+    pip install pytz && \
     wget prdownloads.sourceforge.net/swig/swig-2.0.4.tar.gz && \
     tar zxf swig-2.0.4.tar.gz && \
     (cd swig-2.0.4 && ./configure --prefix=/usr && make && make install) && \
@@ -122,9 +125,7 @@ RUN apt-get -y update && \
 RUN addgroup --gid 1000 exasolution
 RUN adduser --disabled-login --uid 1000 --gid 1000 exasolution
 
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8  
 
 
 
