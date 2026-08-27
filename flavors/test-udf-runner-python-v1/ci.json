@@ -1,0 +1,18 @@
+{
+  "build_runners": ["int-linux-x64-4core-ubuntu24.04-1", "int-linux-arm-4core-ubuntu24.04-1"],
+  "test_config": {
+    "default_test_runners": ["int-linux-x64-2core-ubuntu24.04-1"],
+    "test_sets": [
+      {
+        "name": "python",
+        "files": [],
+        "folders": [
+          "python3/all",
+          "standard-flavor/setup"
+        ],
+        "goal": "release",
+        "generic_language_tests": []
+      }
+    ]
+  }
+}
