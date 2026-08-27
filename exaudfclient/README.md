@@ -1,6 +1,6 @@
 # What is the exaudfclient?
 
-The exaudfclient connects to the database via [ZeroMQ](http://zeromq.org/) and fetches the tuples which then get processed by the user-defined functions (UDFs). Currently, the exaudfclient supports UDFs in the language Python, Java and R. Further languages can be integrated via language binding between C/C++ and the desired langauge. Python 3, Java and R use [SWIG](http://www.swig.org/) for the language binding.
+The exaudfclient connects to the database via [ZeroMQ](http://zeromq.org/) and fetches the tuples which then get processed by the user-defined functions (UDFs). Currently, the exaudfclient supports UDFs in Python and R. Further languages can be integrated via language binding between C/C++ and the desired language. Python 3 and R use [SWIG](http://www.swig.org/) for the language binding.
 
 # How to build the exaudfclient?
 
@@ -8,7 +8,6 @@ The exaudfclient connects to the database via [ZeroMQ](http://zeromq.org/) and f
 
 For the build system:
 
-- Open JDK 11
 - bazel-7.2.1 for more details see [Bazel documentation](https://docs.bazel.build/versions/master/install.html)
 
 The exaudfclient was tested with the following versions of its dependencies:
@@ -23,12 +22,11 @@ For the language support:
 
 - Python 3.10 for pythoncontainer
     - for Python 3 the build requires [Numpy](https://www.numpy.org/) and [Pandas](https://pandas.pydata.org/) in addition for the Pandas Dataframe Support
-- OpenJDK 11 for javacontainer
 - R 4.4 for the rcontainer
 
 ## Start a build
 
-The exaudfclient is a multi-language project. Therefore, we are using [Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) as build system, because it provides build support for many languages and allows to mix these languages. Because the exaudfclient has language bindings to Python 2/3, Java and R, we need specify where Bazel can find the correponding library- and header-files. This is done by Environment Variables.
+The exaudfclient is a multi-language project. Therefore, we are using [Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) as build system, because it provides build support for many languages and allows to mix these languages. Because the exaudfclient has language bindings to Python 2/3 and R, we need specify where Bazel can find the corresponding library and header files. This is done by environment variables.
 
 For executing the build locally, you can use the script 
 
@@ -46,7 +44,6 @@ Both build script can receive parameters, such as Bazel commandline parameter, B
 
 With Bazel defines you can specify which language support is actually compiled into you exaudfclient executbale. The currently supported defines are
 
-    --define java=true
     --define r=true
     --define python=true
     --define benchmark=true # This language is only for test and development purpose and benchmarks the performance of the C++ Implementation
@@ -70,7 +67,7 @@ The usage of multiple linker namespace requires some precautions in the build pr
 
 ## Precautions in the build process
 
-In the build process you need to be cautious which libraries you link together and that no link leaks symbols from a library in one namespace to a library in the other namespace. Furthermore, you have to build a shared library with all dependency linked to it as output target. In our case, we have to main output targets //:exaudfclient and //:libexaudflib.so. Both get loaded into different linker namespaces. The language container live in the same namespace as //:exaudfclient. This namespace must not know anyhing about protobuf and zeromq, because it is possible that a language container may load protobuf or zeromq in a different version. Protobuf and zeromq are only known in the namespace of //:libexaudflib.so. The target //:libexaudflib.so depends on //base/exaudflib:exaudflib which contains the logic of the exaudflib. You must not depend on //base/exaudflib:exaudflib in //:exaudfclient or the langauge container, because this would leak zeromq and protobuf. If you need to depend on the other dependency of //base/exaudflib:exaudflib which not depend on protobuf or zeromq them self, such as //base/exaudflib:script_data_transfer_objects, //base/exaudflib:script_data_transfer_objects_wrapper, //base/script_options_parser:scriptoptionlines, use either their target as self, the collection of libraries //base/exaudflib:exaudflib-deps or the collection of headers //base/exaudflib:header.
+In the build process you need to be cautious which libraries you link together and that no link leaks symbols from a library in one namespace to a library in the other namespace. Furthermore, you have to build a shared library with all dependency linked to it as output target. In our case, we have two main output targets: //:exaudfclient and //:libexaudflib.so. Both get loaded into different linker namespaces. The language containers live in the same namespace as //:exaudfclient. This namespace must not know anything about protobuf and zeromq, because a language container may load protobuf or zeromq in a different version. Protobuf and zeromq are only known in the namespace of //:libexaudflib.so. The target //:libexaudflib.so depends on //base/exaudflib:exaudflib which contains the logic of the exaudflib. You must not depend on //base/exaudflib:exaudflib in //:exaudfclient or a language container, because this would leak zeromq and protobuf. If you need other dependencies of //base/exaudflib:exaudflib that do not depend on protobuf or zeromq, such as //base/exaudflib:script_data_transfer_objects or //base/exaudflib:script_data_transfer_objects_wrapper, use their target directly, the collection of libraries //base/exaudflib:exaudflib-deps, or the collection of headers //base/exaudflib:header.
 
 ## Precautions in the implementations
 
