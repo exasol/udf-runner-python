@@ -341,13 +341,11 @@ class DynamicOutputTest(_Python3UdfSetup):
             'python3': ["<type 'unicode'>", "<class 'str'>"],
             'r': ["character"],
             'lua': ["string"],
-            'java': ["java.lang.String"]
         }
         numType = {
             'python3': ["<type 'float'>", "<class 'float'>"],
             'r': ["double"],
             'lua': ["number"],
-            'java': ["java.lang.Double"]
         }
         self.assertRowEqual(('2',1.0), rows[0])
         self.assertRowEqual(('A',1.0), rows[1])
@@ -579,13 +577,11 @@ class DefaultDynamicOutputTest(_Python3UdfSetup):
             'python3': ["<type 'unicode'>", "<class 'str'>"],
             'r': ["character"],
             'lua': ["string"],
-            'java': ["java.lang.String"]
         }
         numType = {
             'python3': ["<type 'float'>", "<class 'float'>"],
             'r': ["double"],
             'lua': ["number"],
-            'java': ["java.lang.Double"]
         }
         self.assertRowEqual(('2',1.0), rows[0])
         self.assertRowEqual(('A',1.0), rows[1])

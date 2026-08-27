@@ -171,11 +171,11 @@ class DynamicMetadataTest(_Python3UdfSetup):
             ''')
         self.assertRowEqual(('2',), rows[0])
         self.assertRowEqual(('0',), rows[1])
-        self.assertTrue(rows[2][0] == "string" or rows[2][0] == "<type 'unicode'>" or rows[2][0] == "character" or rows[2][0] == "java.lang.String" or rows[2][0] == "<class 'str'>")
+        self.assertTrue(rows[2][0] == "string" or rows[2][0] == "<type 'unicode'>" or rows[2][0] == "character" or rows[2][0] == "<class 'str'>")
         self.assertRowEqual(('CHAR(3) ASCII',), rows[3])
         self.assertRowEqual(('3',), rows[6])
         self.assertRowEqual(('1',), rows[7])
-        self.assertTrue(rows[8][0] == 'number' or rows[8][0] == "<type 'float'>" or rows[8][0] == "double" or rows[8][0] == "java.lang.Double" or rows[8][0] == "<class 'float'>")
+        self.assertTrue(rows[8][0] == 'number' or rows[8][0] == "<type 'float'>" or rows[8][0] == "double" or rows[8][0] == "<class 'float'>")
         self.assertRowEqual(('DOUBLE',), rows[9])
 
 
@@ -312,7 +312,6 @@ class DynamicInputErrors(_Python3UdfSetup):
         err_text = {
             'lua': 'out of range',
             'python3': 'does not exist',
-            'java': 'does not exist',
             }
         with self.assertRaisesRegex(Exception, err_text[self.LANG]):
             self.query('''select fn1.wrong_arg('a') from dual''')
@@ -322,7 +321,6 @@ class DynamicInputErrors(_Python3UdfSetup):
             'lua': 'attempt to perform arithmetic on field',
             'r': 'non-numeric argument to binary operator',
             'python3': 'multiply sequence by non-int of type',
-            'java': 'bad operand types for binary operator',
             }
         with self.assertRaisesRegex(Exception, err_text[self.LANG]):
             self.query('''select fn1.wrong_operation('a','b') from dual''')

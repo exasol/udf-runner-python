@@ -76,7 +76,6 @@ class Vectorsize(udf.TestCase):
             'lua': 100000,
             'python3': 8000,
             'r': 3000,
-            'java': 3000,
         }
         if size > limits.get('r', sys.maxsize):
             raise SkipTest('test is to slow')

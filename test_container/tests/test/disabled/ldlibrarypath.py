@@ -102,32 +102,5 @@ class LDLibraryPathPython(udf.TestCase):
         rows = self.query('''select import_mod()''')
         self.assertRowsEqual([("import_direct:some_imported_value",)],rows)
 
-    def test_importScript_static(self):
-        self.query(udf.fixindent('''
-            CREATE OR REPLACE java SCALAR SCRIPT
-            IMPORTED_X()
-            RETURNS int AS
-            class IMPORTED_X {
-                static int run(ExaMetadata exa, ExaIterator ctx) throws Exception {
-                    return 1;
-                }
-            }
-            '''))
-
-        self.query(udf.fixindent('''
-                CREATE OR REPLACE java SCALAR SCRIPT
-                IMPORTING_X()
-                RETURNS int AS
-                %import	IMPORTED_X;
-                class IMPORTING_X {
-                    static int run(ExaMetadata exa, ExaIterator ctx) throws Exception {
-                        return 1+IMPORTED_X.run(exa, ctx);
-                    }
-                }
-                '''))
-        rows = self.query('SELECT importing_x()')
-        self.assertRowsEqual([(2,)], rows)
-
-
 if __name__ == '__main__':
     udf.main()
