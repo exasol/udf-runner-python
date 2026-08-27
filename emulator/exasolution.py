@@ -125,8 +125,7 @@ else:
     input_file = output_file_fd = output_file = script_lines = script_input_defs = script_output_defs = None
 
 if not single_call_mode:
-    if script_name.endswith('.java'): comment = '//'
-    else: comment = '#'
+    comment = '#'
     for line in script_lines:
         if line.startswith(comment + 'input_column:'):
             script_input_defs.append(line[len(comment + 'input_column:'):])
@@ -301,12 +300,6 @@ def handle_client():
     #response.info.vm_type = PB_VM_EXTERNAL
     response.info.maximal_memory_limit = memory_limit
     response.info.meta_info = meta_info
-    #if redirector_name != None: response.info.vm_type = PB_VM_EXTERNAL
-    #else:
-    #    if script_name.endswith('.py'): response.info.vm_type = PB_VM_PYTHON
-    #    elif script_name.endswith('.R'): response.info.vm_type = PB_VM_R
-    #    elif script_name.endswith('.java'): response.info.vm_type = PB_VM_JAVA
-    #    else: raise RuntimeError("Unsupported VM type")
     send_message(response.SerializeToString())
     initialized = True
 
@@ -355,7 +348,7 @@ def handle_import():
     if kind == PB_IMPORT_SCRIPT_CODE:
         if script_name.endswith('.py'): fname = fname + '.py'
         elif script_name.endswith('.R'): fname = fname + '.R'
-        else: fname = fname + '.java'
+        else: raise RuntimeError("Unsupported script language")
         try: getattr(response, 'import').source_code = open(fname).read()
         except Exception, err:
             response.exception_message = str(err)

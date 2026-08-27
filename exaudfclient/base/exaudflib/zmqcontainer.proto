@@ -83,7 +83,6 @@ enum exascript_vmtype {
     PB_VM_JAVASCRIPT = 3;
     PB_VM_R = 4;
     PB_VM_EXTERNAL = 5;
-    PB_VM_JAVA = 6;
     PM_VM_PLUGIN_LANGUAGE = 7;
 }
 */

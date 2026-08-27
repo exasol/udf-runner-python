@@ -8,9 +8,6 @@ VM_ENABLED_DEPS=select({
         "@exaudfclient_base//:benchmark": ["@exaudfclient_base//benchmark_container:benchmark_container"],
         "//conditions:default": []
     }) + select({
-        "@exaudfclient_base//:java": ["@exaudfclient_base//javacontainer:javacontainer"],
-        "//conditions:default": []
-    }) + select({
         "@exaudfclient_base//:bash": ["@exaudfclient_base//streaming_container:streamingcontainer"],
         "//conditions:default": []
     })
