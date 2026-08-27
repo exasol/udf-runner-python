@@ -10,6 +10,8 @@ build_steps:
         version: 1.35+dfsg-3ubuntu*
       - name: curl
         version: 8.5.0-2ubuntu*
+      - name: ca-certificates
+        version: '20260601~24.04.1'
       - name: build-essential
         version: 12.10ubuntu*
       - name: libpcre3-dev
