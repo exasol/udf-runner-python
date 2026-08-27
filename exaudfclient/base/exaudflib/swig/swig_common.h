@@ -15,7 +15,6 @@ enum VMTYPE {
     VM_JAVASCRIPT = 3,
     VM_R = 4,
     VM_EXTERNAL = 5,
-    VM_JAVA = 6,
     VM_PLUGIN_LANGUAGE = 7,
     VM_BENCHMARK = 8
 };
