@@ -7,6 +7,7 @@ build_steps:
           - conda-forge
         packages:
           - name: git
+            version: =2.49.0
           - name: protobuf
             version: =7.35.1
           - name: pcre
