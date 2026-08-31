@@ -12,8 +12,9 @@ if 'LIBPYEXADATAFRAME_DIR' in os.environ:
     #print("sys.path append",path_to_pyexadataframe)
     sys.path.append(path_to_pyexadataframe)
 else:
-    #Path "external/exaudfclient_base+/" comes from external module "exaudfclient_base"
-    path_to_pyexadataframe="/exaudf/external/exaudfclient_base+/python/python3"
+    # The Python VM is built by this module, while the shared transport lives in
+    # the external exaudfclient_base module.
+    path_to_pyexadataframe="/exaudf/base/python/python3"
     #print("sys.path append",path_to_pyexadataframe)
     sys.path.append(path_to_pyexadataframe)
 
@@ -357,4 +358,3 @@ def __pythonvm_wrapped_singleCall(fn,arg=None):
                     "F-UDF-CL-SL-PYTHON-1118",
                     "Exception during singleCall %s"%fn.__name__,
                     sys.exc_info())
-

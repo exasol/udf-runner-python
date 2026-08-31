@@ -25,7 +25,7 @@ For the language support:
 
 ## Start a build
 
-The exaudfclient is a multi-language project. Therefore, we are using [Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) as build system, because it provides build support for many languages and allows to mix these languages. Because the exaudfclient has language bindings to Python 2/3 and R, we need specify where Bazel can find the corresponding library and header files. This is done by environment variables.
+The exaudfclient is a Python project with a C++ runner. It uses [Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) to build the local Python VM against the shared runner base from `exasol/udf-runner-cpp`. Set the Python library and header locations through environment variables.
 
 For executing the build locally, you can use the script 
 
@@ -43,9 +43,7 @@ Both build script can receive parameters, such as Bazel commandline parameter, B
 
 With Bazel defines you can specify which language support is actually compiled into you exaudfclient executbale. The currently supported defines are
 
-    --define r=true
     --define python=true
-    --define benchmark=true # This language is only for test and development purpose and benchmarks the performance of the C++ Implementation
 
 
 The main targets is //:exaudfclient.
@@ -58,15 +56,13 @@ Bazel allows to query the dependencies of a target. Furthermore, it can export t
 
 # How is the exaudfclient structured?
 
-The exaudfclient consists mainly out of three parts the main function in [exa_udfclient.cc](exa_udfclient.cc), the libexaudf and the language implementations. The first part the main function actually only loads the two other parts. However, in this case it is important how it loads the two other parts, because we need the libexaudf in a different linker namespace than the language implementation to prevent library conflicts. The libexaudf uses  [ZeroMQ](http://zeromq.org/) and  [Protobuf](https://developers.google.com/protocol-buffers/) to communicate with the Exsol Database, but UDFs could be use the same libraries in a different version which would lead to library conflict. The following figure shows the dependencies between the components.
-
-![exaudfclient dependencies](docs/exaudfclient.png)
+The local code contains the main function in [exa_udfclient.cc](exa_udfclient.cc) and the Python VM. The shared libexaudf transport, loader, ZeroMQ, and Protobuf dependencies come from the pinned `exasol/udf-runner-cpp` Bazel module and load in a separate linker namespace.
 
 The usage of multiple linker namespace requires some precautions in the build process and in the implementation. 
 
 ## Precautions in the build process
 
-In the build process you need to be cautious which libraries you link together and that no link leaks symbols from a library in one namespace to a library in the other namespace. Furthermore, you have to build a shared library with all dependency linked to it as output target. In our case, we have two main output targets: //:exaudfclient and //:libexaudflib.so. Both get loaded into different linker namespaces. The language containers live in the same namespace as //:exaudfclient. This namespace must not know anything about protobuf and zeromq, because a language container may load protobuf or zeromq in a different version. Protobuf and zeromq are only known in the namespace of //:libexaudflib.so. The target //:libexaudflib.so depends on //base/exaudflib:exaudflib which contains the logic of the exaudflib. You must not depend on //base/exaudflib:exaudflib in //:exaudfclient or a language container, because this would leak zeromq and protobuf. If you need other dependencies of //base/exaudflib:exaudflib that do not depend on protobuf or zeromq, such as //base/exaudflib:script_data_transfer_objects or //base/exaudflib:script_data_transfer_objects_wrapper, use their target directly, the collection of libraries //base/exaudflib:exaudflib-deps, or the collection of headers //base/exaudflib:header.
+Do not link the Python VM directly against the shared transport implementation: use only the `@exaudfclient_base//exaudflib:header` and `@exaudfclient_base//exaudflib:exaudflib-deps` targets. This keeps ZeroMQ and Protobuf out of the Python VM linker namespace.
 
 ## Precautions in the implementations
 

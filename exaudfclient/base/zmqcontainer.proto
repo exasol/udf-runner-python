@@ -83,6 +83,7 @@ enum exascript_vmtype {
     PB_VM_JAVASCRIPT = 3;
     PB_VM_R = 4;
     PB_VM_EXTERNAL = 5;
+    PB_VM_JAVA = 6;
     PM_VM_PLUGIN_LANGUAGE = 7;
 }
 */
@@ -257,6 +258,3 @@ message exascript_response {
     optional exascript_close close = 6;
     optional exascript_import_rep import = 7;
     optional exascript_next_data_rep next = 8;
-    optional exascript_ping ping = 9;
-    optional exascript_single_call_rep call = 10;
-}

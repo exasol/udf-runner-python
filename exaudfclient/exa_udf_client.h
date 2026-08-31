@@ -1,7 +1,8 @@
 #pragma once
+
 #include <string>
 
-#include "exa_udf_base.h"
+#include "exa_udfclient_binary_common/exa_udf_base.h"
 #include "exaudflib/vm/swig_vm.h"
 
 class ExaUdfClient : public ExaUdfClientBase {
@@ -11,7 +12,7 @@ public:
     void usage(const std::string& programName) override;
     bool validate_arguments(int argc, char** argv) override;
     std::function<SWIGVMContainers::SWIGVM*()> create_vm() override;
-    
+
 protected:
     std::string m_languageArg;
 };

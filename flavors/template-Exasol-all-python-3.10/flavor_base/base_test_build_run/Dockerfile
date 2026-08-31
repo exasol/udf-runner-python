@@ -38,5 +38,5 @@ RUN ./test_udfclient.sh /exaudf/exaudfclient_static
 WORKDIR /
 RUN mkdir /exasol_emulator
 COPY emulator/ /exasol_emulator
-COPY /exaudfclient/base/exaudflib/zmqcontainer.proto /exasol_emulator
+COPY /exaudfclient/base/zmqcontainer.proto /exasol_emulator
 RUN cd /exasol_emulator && protoc zmqcontainer.proto --python_out=.
