@@ -31,6 +31,8 @@ build_steps:
         version: 1.34+dfsg-1ubuntu*
       - name: curl
         version: 7.81.0-1ubuntu*
+      - name: openjdk-11-jdk-headless
+        version: 11.0.32+9-1ubuntu*
       - name: ca-certificates
         version: 20260601~22.04.1
       - name: build-essential

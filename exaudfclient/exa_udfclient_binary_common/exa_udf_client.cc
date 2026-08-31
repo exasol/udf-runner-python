@@ -33,5 +33,5 @@ void ExaUdfClient::usage(const std::string& programName) {
 }
 
 std::function<SWIGVMContainers::SWIGVM*()> ExaUdfClient::create_vm() {
-    return ::create_vm(m_languageArg);
+    return ::create_vm(m_languageArg, false);
 }

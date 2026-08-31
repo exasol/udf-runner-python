@@ -5,7 +5,7 @@ COPY deps/01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
 
 RUN apt-get -y update && \
     apt-get -y install \
-        openjdk-11-jre-headless \
+        openjdk-17-jre-headless \
         locales \
         python3.10-venv \
         python3-pip \
