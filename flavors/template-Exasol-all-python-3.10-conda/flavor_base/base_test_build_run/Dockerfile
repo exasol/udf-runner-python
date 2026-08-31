@@ -23,5 +23,6 @@ RUN ./test_udfclient.sh /exaudf/exaudfclient_static
 WORKDIR /
 RUN mkdir /exasol_emulator
 COPY emulator/ /exasol_emulator
-RUN curl -fsSL "https://raw.githubusercontent.com/exasol/udf-runner-cpp/${UDF_RUNNER_CPP_COMMIT}/udf-runner-cpp/v1/base/exaudflib/zmqcontainer.proto" -o /exasol_emulator/zmqcontainer.proto
+RUN curl -fsSL "https://raw.githubusercontent.com/exasol/udf-runner-cpp/${UDF_RUNNER_CPP_COMMIT}/udf-runner-cpp/v1/base/exaudflib/zmqcontainer.proto" -o /exasol_emulator/zmqcontainer.proto \
+    && printf '%s\n' '    optional exascript_ping ping = 9;' '    optional exascript_single_call_rep call = 10;' '}' >> /exasol_emulator/zmqcontainer.proto
 RUN cd /exasol_emulator && protoc zmqcontainer.proto --python_out=.
