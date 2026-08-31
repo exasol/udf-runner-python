@@ -4,6 +4,7 @@ build_steps:
   - name: install_apt_packages
     apt:
       packages:
+      - name: git
       - name: coreutils
         version: 9.4-3ubuntu*
       - name: tar

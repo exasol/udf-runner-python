@@ -6,6 +6,7 @@ build_steps:
       channels:
       - conda-forge
       packages:
+      - name: git
       - name: protobuf
         version: =7.35.1
       - name: pcre
