@@ -14,5 +14,4 @@ public:
     
 protected:
     std::string m_languageArg;
-    bool m_useCtpgParser = false;
 };

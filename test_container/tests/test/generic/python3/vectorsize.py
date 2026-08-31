@@ -111,8 +111,7 @@ class Vectorsize(_Python3UdfSetup):
         limits = {
             'lua':      100000,
             'python3':   8000,
-            'r':        3000,
-            'java':     3000
+            'r':        3000
             }
         if size > limits.get(self.LANG, sys.maxsize):
             raise udf.SkipTest('test is to slow')

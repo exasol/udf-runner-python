@@ -21,7 +21,7 @@ OUT_ENV_FILE="$1"
 export DEBIAN_FRONTEND=noninteractive
 
 apt update
-apt install -y curl openjdk-11-jdk libzmq3-dev python3 protobuf-compiler build-essential python3-pip libpcre3-dev chrpath tar locales coreutils libssl-dev
+apt install -y curl libzmq3-dev python3 protobuf-compiler build-essential python3-pip libpcre3-dev chrpath tar locales coreutils libssl-dev
 
 BAZEL_PACKAGE_VERSION="7.2.1"
 BAZEL_PACKAGE_FILE="bazel_$BAZEL_PACKAGE_VERSION-linux-x86_64.deb"

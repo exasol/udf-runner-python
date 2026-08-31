@@ -2,10 +2,6 @@
 #include <iostream>
 #include "exa_vm_factory.h"
 
-#ifdef ENABLE_JAVA_VM
-#include "javacontainer/javacontainer_builder.h"
-#endif //ENABLE_JAVA_VM
-
 #ifdef ENABLE_PYTHON_VM
 #include "python/pythoncontainer.h"
 #endif //ENABLE_PYTHON_VM
@@ -32,17 +28,6 @@ std::function<SWIGVMContainers::SWIGVM*()> create_vm(const std::string& argv_lan
             return []() { return new  SWIGVMContainers::PythonVM(false); };
         #else
             throw SWIGVMContainers::SWIGVM::exception("this exaudfclient has been compilied without Python support");
-        #endif
-    }
-    else if(argv_lang.compare("lang=java") == 0) {
-        #ifdef ENABLE_JAVA_VM
-            if (use_ctpg_options_parser) {
-                return [&](){return SWIGVMContainers::JavaContainerBuilder().useCtpgParser().build();};
-            } else {
-                return [&](){return SWIGVMContainers::JavaContainerBuilder().build();};
-            }
-        #else
-            throw SWIGVMContainers::SWIGVM::exception("this exaudfclient has been compilied without Java support");
         #endif
     }
     else if(argv_lang.compare("lang=streaming") == 0) {

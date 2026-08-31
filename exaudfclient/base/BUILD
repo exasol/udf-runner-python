@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-exports_files(["filter_swig_code.py", "build_integrated.py",
+exports_files(["build_integrated.py",
 	       "create_binary_wrapper.sh", "create_binary_wrapper_valgrind.sh",
 	       "create_binary_wrapper_valgrind_massif.sh", "exaudfclient.template.sh",
 	       "replace_swig_import_helper.py"])
@@ -16,11 +16,6 @@ config_setting(
 config_setting(
     name = "python",
     define_values = {"python": "true"},
-)
-
-config_setting(
-    name = "java",
-    define_values = {"java": "true"},
 )
 
 config_setting(
