@@ -30,7 +30,7 @@ RUN mkdir /exaudfclient /exaudf
 COPY /exaudfclient/ /exaudfclient/
 
 WORKDIR /exaudfclient/
-RUN ["/bin/bash", "-c", "source /env && bash build.sh --config no-tty -c dbg --config python --config test-binaries"]
+RUN ["/bin/bash", "-c", "source /env && export PROTOBUF_LIBRARY_PREFIX=\"${PROTOBUF_LIBRARY_PREFIX:-${MAMBA_ROOT_PREFIX:-/usr}/lib}\" PROTOBUF_INCLUDE_PREFIX=\"${PROTOBUF_INCLUDE_PREFIX:-${MAMBA_ROOT_PREFIX:-/usr}/include}\" ZMQ_LIBRARY_PREFIX=\"${ZMQ_LIBRARY_PREFIX:-${MAMBA_ROOT_PREFIX:-/usr}/lib}\" ZMQ_INCLUDE_PREFIX=\"${ZMQ_INCLUDE_PREFIX:-${MAMBA_ROOT_PREFIX:-/usr}/include}\" && bash build.sh --config no-tty -c dbg --config python --config test-binaries"]
 RUN cp -r -L bazel-bin/* /exaudf
 
 WORKDIR /exaudfclient/base
