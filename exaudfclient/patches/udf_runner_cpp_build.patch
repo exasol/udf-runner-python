@@ -4,7 +4,7 @@
  	       "replace_swig_import_helper.py"])
  
  load("//:variables.bzl", "VM_ENABLED_DEFINES")
-+load("@rules_cc//cc:defs.bzl", "cc_library")
++load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
  
  config_setting(
      name = "benchmark",
