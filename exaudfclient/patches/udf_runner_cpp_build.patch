@@ -26,3 +26,51 @@
 @@ -1,1 +1,2 @@
  package(default_visibility = ["//visibility:public"])
 +load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- exaudflib/test/BUILD
++++ exaudflib/test/BUILD
+@@ -1,1 +1,2 @@
++load("@rules_cc//cc:defs.bzl", "cc_test")
+ cc_test(
+
+--- script_options_parser/BUILD
++++ script_options_parser/BUILD
+@@ -1,1 +1,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- script_options_parser/ctpg/BUILD
++++ script_options_parser/ctpg/BUILD
+@@ -1,1 +1,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- script_options_parser/ctpg/test/BUILD
++++ script_options_parser/ctpg/test/BUILD
+@@ -1,1 +1,2 @@
++load("@rules_cc//cc:defs.bzl", "cc_test")
+ cc_test(
+
+--- script_options_parser/legacy/BUILD
++++ script_options_parser/legacy/BUILD
+@@ -1,1 +1,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- script_options_parser/legacy/test/BUILD
++++ script_options_parser/legacy/test/BUILD
+@@ -1,1 +1,2 @@
++load("@rules_cc//cc:defs.bzl", "cc_test")
+ cc_test(
+
+--- swig_factory/BUILD
++++ swig_factory/BUILD
+@@ -1,1 +1,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- utils/BUILD
++++ utils/BUILD
+@@ -2,1 +2,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
