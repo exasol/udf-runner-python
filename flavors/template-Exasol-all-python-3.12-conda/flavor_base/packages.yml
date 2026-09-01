@@ -1,13 +1,18 @@
 build_steps:
 - name: build_deps
   phases:
+    - name: install_apt_packages
+      apt:
+        packages:
+          - name: git
+            version: 1:2.43.0-1ubuntu*
+      validation_cfg:
+        version_mandatory: true
     - name: install_conda_packages
       conda:
         channels:
           - conda-forge
         packages:
-          - name: git
-            version: =2.49.0
           - name: protobuf
             version: =7.35.1
           - name: pcre
