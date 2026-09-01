@@ -20,11 +20,6 @@ jobs:
       - name: Install UDF Client Dependencies
         run: |
           sudo bash scripts/installUdfClientDeps.sh "$UDF_CLIENT_ENV_FILE"
-      - name: Build
-        run: |
-          source "$UDF_CLIENT_ENV_FILE"
-          bazel build --lockfile_mode=off --config no-tty -c dbg --config python --config fast-binary --verbose_failures
-        working-directory: ./exaudfclient/
 
   tests:
     runs-on: ubuntu-24.04
