@@ -18,7 +18,7 @@ build_steps:
       - name: pcre
         version: =*
       - name: bazel
-        version: =*
+        version: =8.3.1
       - name: gxx
         version: =*
       - name: gcc
