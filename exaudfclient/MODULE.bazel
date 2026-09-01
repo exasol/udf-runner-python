@@ -6,6 +6,8 @@ git_override(
     remote = "https://github.com/exasol/udf-runner-cpp.git",
     commit = "b3a8c204a2555b373c66110d5e8301a374b32a6a",
     strip_prefix = "udf-runner-cpp/v1/base",
+    patches = ["//:patches/udf_runner_cpp_build.patch"],
+    patch_args = ["-p0"],
 )
 bazel_dep(name = "rules_cc", version = "0.2.22")
 bazel_dep(name = "rules_shell", version = "0.8.0")
