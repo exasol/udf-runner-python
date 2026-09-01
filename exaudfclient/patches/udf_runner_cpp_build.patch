@@ -8,3 +8,9 @@
  
  config_setting(
      name = "benchmark",
+
+--- MODULE.bazel
++++ MODULE.bazel
+@@ -1,1 +1,2 @@
+ module(name="exaudfclient_base", version = "1.0")
++bazel_dep(name = "rules_cc", version = "0.2.22")
