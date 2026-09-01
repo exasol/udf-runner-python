@@ -5,7 +5,7 @@ build_steps:
     apt:
       packages:
       - name: git
-        version: 1:2.34.1-1ubuntu*
+        version: '*'
     validation_cfg:
       version_mandatory: true
   - name: install_conda_packages
@@ -14,19 +14,19 @@ build_steps:
       - conda-forge
       packages:
       - name: protobuf
-        version: =7.35.1
+        version: =*
       - name: pcre
-        version: '=8.45'
+        version: =*
       - name: bazel
-        version: =9.2.0
+        version: =*
       - name: make
-        version: '=4.3'
+        version: =*
       - name: chrpath
-        version: '=0.16'
+        version: =*
       - name: gxx
-        version: =13.4.0
+        version: =*
       - name: gcc
-        version: =13.4.0
+        version: =*
       binary: Mamba
     variables:
       PROTOBUF_BIN: '$MAMBA_ROOT_PREFIX/bin/protoc'
@@ -44,17 +44,17 @@ build_steps:
     apt:
       packages:
       - name: gdb
-        version: 12.1-0ubuntu*
+        version: '*'
       - name: valgrind
-        version: 1:3.18.1-1ubuntu*
+        version: '*'
       - name: gdbserver
-        version: 12.1-0ubuntu*
+        version: '*'
       - name: binutils
-        version: 2.38-4ubuntu*
+        version: '*'
       - name: patchelf
-        version: 0.14.3-1
+        version: '*'
       - name: strace
-        version: 5.16-0ubuntu*
+        version: '*'
   validation_cfg:
     version_mandatory: true
 - name: security_scan
@@ -75,4 +75,4 @@ build_steps:
         - name: trivy
   validation_cfg:
     version_mandatory: false
-version: 1.0.0
+version: '*'
