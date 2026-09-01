@@ -14,3 +14,15 @@
 @@ -1,1 +1,2 @@
  module(name="exaudfclient_base", version = "1.0")
 +bazel_dep(name = "rules_cc", version = "0.2.22")
+
+--- exaudflib/BUILD
++++ exaudflib/BUILD
+@@ -4,1 +4,2 @@
+ load("//:variables.bzl", "VM_ENABLED_DEFINES")
++load("@rules_cc//cc:defs.bzl", "cc_library")
+
+--- exa_udfclient_binary_common/BUILD
++++ exa_udfclient_binary_common/BUILD
+@@ -1,1 +1,2 @@
+ package(default_visibility = ["//visibility:public"])
++load("@rules_cc//cc:defs.bzl", "cc_library")
