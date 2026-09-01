@@ -60,11 +60,11 @@ build_steps:
       - name: python
         version: =3.12.*
       - name: numpy
-        version: =*
+        version: =2.2.6
       - name: pandas
-        version: =*
+        version: =2.3.3
       - name: pyarrow
-        version: =*
+        version: =25.0.0
       - name: mamba
         version: =*
       binary: Micromamba
