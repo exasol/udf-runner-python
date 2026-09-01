@@ -5,7 +5,7 @@ build_steps:
     apt:
       packages:
       - name: git
-        version: 1:2.34.1-1ubuntu*
+        version: 1:2.43.0-1ubuntu*
     validation_cfg:
       version_mandatory: true
   - name: install_conda_packages
