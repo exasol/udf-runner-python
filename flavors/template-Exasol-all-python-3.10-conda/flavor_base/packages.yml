@@ -25,6 +25,8 @@ build_steps:
         version: =*
       - name: make
         version: =*
+      - name: binutils
+        version: =*
       - name: chrpath
         version: =*
       binary: Mamba

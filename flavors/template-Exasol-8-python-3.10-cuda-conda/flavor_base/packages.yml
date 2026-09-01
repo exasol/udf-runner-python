@@ -25,6 +25,8 @@ build_steps:
         version: =*
       - name: gxx
         version: =*
+      - name: binutils
+        version: =*
       - name: gcc
         version: =*
       binary: Mamba
