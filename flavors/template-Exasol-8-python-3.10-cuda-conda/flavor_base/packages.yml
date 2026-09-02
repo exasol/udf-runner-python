@@ -17,8 +17,6 @@ build_steps:
         version: =*
       - name: pcre
         version: =*
-      - name: bazel
-        version: =8.3.1
       - name: make
         version: =*
       - name: chrpath
@@ -30,6 +28,12 @@ build_steps:
       - name: gcc
         version: =*
       binary: Mamba
+  - name: install_bazel
+    tools:
+      bazel:
+        version: '8.3.1'
+    validation_cfg:
+      version_mandatory: true
     variables:
       PROTOBUF_BIN: '$MAMBA_ROOT_PREFIX/bin/protoc'
       LD_LIBRARY_PATH: '$LD_LIBRARY_PATH:$MAMBA_ROOT_PREFIX/lib/'
