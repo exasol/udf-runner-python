@@ -1,5 +1,7 @@
 FROM {{base_test_deps}}
 
+ARG UDF_RUNNER_CPP_COMMIT=b3a8c204a2555b373c66110d5e8301a374b32a6a
+
 RUN mkdir /conf /buckets
 
 RUN exaslpm export-variables --out-file /env
@@ -22,5 +24,5 @@ RUN ./test_udfclient.sh /exaudf/exaudfclient_static
 WORKDIR /
 RUN mkdir /exasol_emulator
 COPY emulator/ /exasol_emulator
-COPY /exaudfclient/base/exaudflib/zmqcontainer.proto /exasol_emulator
+RUN curl -fsSL "https://raw.githubusercontent.com/exasol/udf-runner-cpp/${UDF_RUNNER_CPP_COMMIT}/udf-runner-cpp/v1/base/exaudflib/zmqcontainer.proto" -o /exasol_emulator/zmqcontainer.proto
 RUN cd /exasol_emulator && protoc zmqcontainer.proto --python_out=.

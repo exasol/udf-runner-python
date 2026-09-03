@@ -5,19 +5,19 @@ build_steps:
     apt:
       packages:
       - name: coreutils
-        version: 9.4-3ubuntu*
+        version: '*'
       - name: adduser
-        version: 3.137ubuntu*
+        version: '*'
       - name: locales
-        version: 2.39-0ubuntu*
+        version: '*'
       - name: curl
-        version: 8.5.0-2ubuntu*
+        version: '*'
       - name: ca-certificates
-        version: '20260601~24.04.1'
+        version: '*'
       - name: bzip2
-        version: 1.0.8-5.1build0.1
+        version: '*'
       - name: libxml2
-        version: 2.9.14+dfsg-1.3ubuntu*
+        version: '*'
   - name: install_micromamba
     tools:
       micromamba:
@@ -35,13 +35,13 @@ build_steps:
       - conda-forge
       packages:
       - name: libprotobuf
-        version: =7.35.1
+        version: =*
       - name: zeromq
-        version: =4.3.5
+        version: =*
       - name: nss
-        version: '=3.118'
+        version: =*
       - name: cppzmq
-        version: =4.11.0
+        version: =*
       binary: Micromamba
     variables:
       PROTOBUF_LIBRARY_PREFIX: $MAMBA_ROOT_PREFIX/lib
@@ -63,19 +63,19 @@ build_steps:
       - nvidia
       packages:
       - name: python
-        version: =3.12.13
+        version: =3.12.*
       - name: numpy
-        version: =2.5.1
+        version: =2.2.6
       - name: pandas
         version: =2.3.3
       - name: pyarrow
         version: =25.0.0
       - name: libarrow
-        version: =25.0.0=*_cuda
+        version: =*=*_cuda
       - name: mamba
-        version: =2.8.1
+        version: =*
       - name: cuda-toolkit
-        version: =13.3.1
+        version: =*
       binary: Micromamba
     variables:
       PYTHON3_PREFIX: $MAMBA_ROOT_PREFIX
@@ -92,7 +92,7 @@ build_steps:
     apt:
       packages:
       - name: tzdata
-        version: 2026*
+        version: '*'
   - name: install_conda_packages
     conda:
       channels:
