@@ -4,7 +4,7 @@ bazel_dep(name = "exaudfclient_base", version = "1.0.0")
 git_override(
     module_name = "exaudfclient_base",
     remote = "https://github.com/exasol/udf-runner-cpp.git",
-    commit = "b3a8c204a2555b373c66110d5e8301a374b32a6a",
+    commit = "fe4ca609677c556fafb99b2be0501203843d850f",
     strip_prefix = "udf-runner-cpp/v1/base",
     patches = ["//:patches/udf_runner_cpp_build.patch"],
     patch_args = ["-p0"],
