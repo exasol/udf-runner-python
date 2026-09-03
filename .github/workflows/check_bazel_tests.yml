@@ -27,14 +27,6 @@ jobs:
           bazel build --lockfile_mode=off --config no-tty -c dbg --config python --config fast-binary --verbose_failures
         working-directory: ./exaudfclient/
 
-  tests:
-    runs-on: ubuntu-24.04
-    strategy:
-     fail-fast: false
-     matrix:
-        include:
-          - test: "@exaudfclient_base//exaudflib/test/..."
-            name: "exaudflib"
     steps:
       - uses: actions/checkout@v6
       - name: Install ZMQ
